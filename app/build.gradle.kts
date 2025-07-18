@@ -45,7 +45,7 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.coil.compose)
     implementation(libs.haze)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
