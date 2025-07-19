@@ -11,4 +11,13 @@ data class InfoDto(
     val next: String?,
     @SerializedName("prev")
     val prev: String?
-)
+) {
+    companion object {
+        val EMPTY = InfoDto(
+            count = 0,
+            pages = 0,
+            next = null,
+            prev = null
+        )
+    }
+}

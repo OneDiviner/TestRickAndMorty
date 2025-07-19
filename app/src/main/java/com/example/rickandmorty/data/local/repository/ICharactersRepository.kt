@@ -9,4 +9,14 @@ interface ICharactersRepository {
 
     fun getCharactersList(): Flow<List<CharacterEntity>>
 
+    suspend fun clearAllCharacters()
+
+    fun getFilteredCharacters(
+        nameQuery: String? = null,
+        status: String? = null,
+        species: String? = null,
+        type: String? = null,
+        gender: String? = null
+    ) : Flow<List<CharacterEntity>>
+
 }

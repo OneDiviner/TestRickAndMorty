@@ -6,14 +6,21 @@ import com.example.rickandmorty.data.network.repository.IRickAndMortyRepository
 import com.example.rickandmorty.domain.mapper.mapCharactersDtoListToEntityList
 import javax.inject.Inject
 
-class FetchAndSaveCharactersUseCase @Inject constructor(
+
+class LoadMoreCharactersUseCase @Inject constructor(
     private val localRepository: ICharactersRepository,
     private val networkRepository: IRickAndMortyRepository
 ) {
-    suspend operator fun invoke(page: Int? = null) : InfoDto {
-        val result = networkRepository.getCharacterList(page)
+    suspend operator fun invoke(
+        page: Int,
+        characterName: String? = null,
+        characterStatus: String? = null,
+        characterSpecies: String? = null,
+        characterType: String? = null,
+        characterGender: String? = null
+    ) : InfoDto {
+        val result = networkRepository.getCharacterList(page, characterName, characterStatus, characterSpecies, characterType, characterGender)
         result.onSuccess { characters ->
-            localRepository.clearAllCharacters()
             localRepository.insertCharactersList(mapCharactersDtoListToEntityList(characters.results))
             return characters.info
         }

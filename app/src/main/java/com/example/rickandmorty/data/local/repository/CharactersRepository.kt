@@ -15,4 +15,19 @@ class CharactersRepository @Inject constructor(
     override fun getCharactersList(): Flow<List<CharacterEntity>> {
         return charactersDao.getAllCharacters()
     }
+
+    override suspend fun clearAllCharacters() {
+        charactersDao.clearAllCharacters()
+    }
+
+    override fun getFilteredCharacters(
+        nameQuery: String?, // Можно добавить значения по умолчанию
+        status: String?,
+        species: String?,
+        type: String?,
+        gender: String?
+    ): Flow<List<CharacterEntity>> {
+        return charactersDao.getFilteredCharacters(nameQuery, status, species, type, gender)
+    }
+
 }

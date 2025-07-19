@@ -7,9 +7,16 @@ import javax.inject.Inject
 class RickAndMortyRepository @Inject constructor(
     private val rickAndMortyApi: RickAndMortyApi
 ) : IRickAndMortyRepository {
-    override suspend fun getCharacterList(page: Int?): Result<CharacterListResponseDto> {
+    override suspend fun getCharacterList(
+        page: Int?,
+        characterName: String?,
+        characterStatus: String?,
+        characterSpecies: String?,
+        characterType: String?,
+        characterGender: String?
+    ): Result<CharacterListResponseDto> {
         return try {
-            val response = rickAndMortyApi.getCharactersList(page)
+            val response = rickAndMortyApi.getCharactersList(page, characterName, characterStatus, characterSpecies, characterType, characterGender)
             Result.success(response.body() ?: throw Exception("Empty response body"))
         } catch (e: Exception) {
             Result.failure(e)

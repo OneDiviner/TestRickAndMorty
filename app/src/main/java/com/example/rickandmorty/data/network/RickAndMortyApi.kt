@@ -7,5 +7,12 @@ import retrofit2.http.Query
 
 interface RickAndMortyApi {
     @GET("character")
-    suspend fun getCharactersList(@Query(value = "page") page: Int? = null) : Response<CharacterListResponseDto>
+    suspend fun getCharactersList(
+        @Query("page") page: Int? = null, // Параметр для страницы остается
+        @Query("name") name: String? = null, // Фильтр по имени
+        @Query("status") status: String? = null, // Фильтр по статусу (alive, dead, unknown)
+        @Query("species") species: String? = null, // Фильтр по виду
+        @Query("type") type: String? = null, // Фильтр по типу
+        @Query("gender") gender: String? = null // Фильтр по полу (female, male, genderless, unknown)
+    ) : Response<CharacterListResponseDto>
 }
